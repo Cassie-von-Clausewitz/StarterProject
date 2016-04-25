@@ -1,6 +1,5 @@
 package com.kyleriedemann.starterproject.network;
 
-import com.github.simonpercic.oklog3.OkLogInterceptor;
 import com.google.gson.Gson;
 import com.kyleriedemann.starterproject.BuildConfig;
 import com.kyleriedemann.starterproject.StarterApplication;
@@ -9,6 +8,7 @@ import java.io.File;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -33,8 +33,8 @@ public class ServiceGenerator {
 
     public static <T> T createService(Class<T> serviceClass) {
         if (BuildConfig.DEBUG){
-            OkLogInterceptor okLogInterceptor = OkLogInterceptor.builder().build();
-            httpClient.addInterceptor(okLogInterceptor);
+            HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
+            httpClient.addInterceptor(logger);
         }
 
         File cacheDir = new File(StarterApplication.instance().getCacheDir(), "http");
