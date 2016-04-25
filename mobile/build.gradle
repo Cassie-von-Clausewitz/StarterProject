@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.kyleriedemann.starterproject"
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "API_KEY", "\"\""
+        buildConfigField "String", "API_URL", "\"\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    wearApp project(':wear')
+
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    String versionSupport = "23.3.0"
+    String okHttpVersion = "3.2.0"
+    String retrofitVersion = "2.0.1"
+
+    // support libraries
+    compile "com.android.support:appcompat-v7:$versionSupport"
+    compile "com.android.support:recyclerview-v7:$versionSupport"
+    compile "com.android.support:design:$versionSupport"
+    compile "com.android.support:cardview-v7:$versionSupport"
+    compile "com.android.support:gridlayout-v7:$versionSupport"
+
+    // network
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+
+    // rx
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+
+    // logging
+    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.github.simonpercic:oklog3:0.2.1'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2"
+
+    // ui
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
+    compile('com.mikepenz:aboutlibraries:5.5.9@aar') {
+        transitive = true
+    }
+
+    // testing
+    testCompile 'junit:junit:4.12'
+}
