@@ -1,5 +1,7 @@
 # StarterProject
 
+This is terrible, don't use this for anything.
+
 Simple Android starter project that pulls in most of the dependencies I end up including in new projects, and has a few classes that handle common functionality.
 
 ## Included Dependencies
